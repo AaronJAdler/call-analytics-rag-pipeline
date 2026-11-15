@@ -159,7 +159,7 @@ part of every call's content hash, so the next sync re-embeds everything once.
 | 75 tests: the generator's answer key; each redaction rule, including the three documented limits; chunking; the embedder; sync counts and embedder call counts; tenant filter, including five malformed tenant ids, two of them built to alter the filter; erasure through all three layers; reopening the index; the evaluation matching the committed report | Locally |
 | The full evaluation | Locally; the numbers above are copied from its output |
 | The command-line flow shown above | Locally |
-| The same in GitHub Actions | See the CI badge. This README was written before the first CI run. |
+| GitHub Actions, first push (commit 304f072, Ubuntu 24.04) | Passed: lint, types, 75 tests including the evaluation matching the committed report on a different machine, and the command-line run. The badge shows the current state. |
 | A real embedding model | Not run. Only the hashing embedder was used. |
 | Real call transcripts | Not used, by design. Nothing here says how the redactor does on real speech. |
 | Concurrent readers and writers | Not tested. The purge is documented as unsafe during them. |

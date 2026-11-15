@@ -1,0 +1,47 @@
+[project]
+name = "call-analytics-rag-pipeline"
+version = "0.1.0"
+description = "Synthetic call transcripts through PII redaction, chunking and an incremental, tenant-filtered LanceDB index, with a retrieval evaluation."
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "lancedb>=0.40",
+    "pyarrow>=17",
+]
+
+[project.scripts]
+callrag = "callrag.cli:main"
+
+[dependency-groups]
+dev = ["mypy>=1.11", "pytest>=8", "ruff>=0.6"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/callrag"]
+
+[tool.ruff]
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "S", "SIM", "DTZ"]
+ignore = ["S608", "SIM905"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101", "S311"]
+"src/callrag/synth.py" = ["S311"]
+"src/callrag/evaluate.py" = ["S311"]
+
+[tool.mypy]
+files = ["src"]
+strict = true
+
+[[tool.mypy.overrides]]
+module = ["lancedb.*", "pyarrow.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

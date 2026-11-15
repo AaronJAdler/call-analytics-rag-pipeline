@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Lint, types, tests, evaluation
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: astral-sh/setup-uv@d0d8abe699bfb85fec6de9f7adb5ae17292296ff # v6
+        with:
+          enable-cache: true
+      - run: uv sync --frozen
+      - run: uv run ruff check .
+      - run: uv run ruff format --check .
+      - run: uv run mypy
+      # One of the tests runs the whole evaluation and compares it with docs/eval.json.
+      - run: uv run pytest -v
+      - name: Build, search and erase from the command line
+        run: |
+          {
+            echo '### Command-line run on 600 synthetic calls'
+            echo '```'
+            uv run callrag generate
+            uv run callrag build
+            uv run callrag build
+            uv run callrag search --tenant valley-air --query "upstairs Carrier AC warm air" -k 1
+            uv run callrag erase valley-air-00007
+            uv run callrag build
+            echo '```'
+          } | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Evaluation report
+        run: cat docs/eval.md >> "$GITHUB_STEP_SUMMARY"

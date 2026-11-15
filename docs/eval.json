@@ -1,0 +1,213 @@
+{
+  "seed": 7,
+  "embedder": "hashing-v1-2048",
+  "corpus": {
+    "tenants": 3,
+    "calls": 600,
+    "turns": 9408,
+    "chunks": 1716,
+    "pii_items": 4271
+  },
+  "redaction": {
+    "planted": 4271,
+    "removed": 4141,
+    "by_form": [
+      {
+        "kind": "NAME",
+        "form": "agent's first name",
+        "planted": 600,
+        "removed": 600
+      },
+      {
+        "kind": "NAME",
+        "form": "caller's full name after \"my name is\", \"this is\" and similar",
+        "planted": 600,
+        "removed": 600
+      },
+      {
+        "kind": "NAME",
+        "form": "caller's first name, said by the agent",
+        "planted": 1200,
+        "removed": 1200
+      },
+      {
+        "kind": "NAME",
+        "form": "third person after \"my husband\", \"our tenant\" and similar",
+        "planted": 103,
+        "removed": 103
+      },
+      {
+        "kind": "NAME",
+        "form": "third person named with no cue",
+        "planted": 61,
+        "removed": 0
+      },
+      {
+        "kind": "PHONE",
+        "form": "digits with punctuation",
+        "planted": 449,
+        "removed": 449
+      },
+      {
+        "kind": "PHONE",
+        "form": "ten digits run together",
+        "planted": 63,
+        "removed": 63
+      },
+      {
+        "kind": "PHONE",
+        "form": "digits spoken as words",
+        "planted": 88,
+        "removed": 88
+      },
+      {
+        "kind": "EMAIL",
+        "form": "written form",
+        "planted": 301,
+        "removed": 301
+      },
+      {
+        "kind": "EMAIL",
+        "form": "\"name dot name at example dot com\"",
+        "planted": 54,
+        "removed": 54
+      },
+      {
+        "kind": "ADDRESS",
+        "form": "number, street, city, state, ZIP",
+        "planted": 324,
+        "removed": 324
+      },
+      {
+        "kind": "ADDRESS",
+        "form": "number, street, apartment",
+        "planted": 129,
+        "removed": 129
+      },
+      {
+        "kind": "ADDRESS",
+        "form": "number and street, all lower case",
+        "planted": 78,
+        "removed": 78
+      },
+      {
+        "kind": "ADDRESS",
+        "form": "described without a number",
+        "planted": 69,
+        "removed": 0
+      },
+      {
+        "kind": "CARD",
+        "form": "16 digits, spaced, dashed or plain",
+        "planted": 152,
+        "removed": 152
+      }
+    ],
+    "false_redactions": [
+      {
+        "placeholder": "PHONE",
+        "rule": "phone number",
+        "count": 215,
+        "examples": [
+          "4436697325",
+          "5976261497",
+          "6885069390"
+        ]
+      }
+    ]
+  },
+  "index_scan": {
+    "values_found": 130,
+    "by_form": [
+      {
+        "kind": "ADDRESS",
+        "form": "described without a number",
+        "found": 69
+      },
+      {
+        "kind": "NAME",
+        "form": "third person named with no cue",
+        "found": 61
+      }
+    ]
+  },
+  "retrieval": {
+    "redacted": {
+      "keyword": {
+        "queries": 300,
+        "hit_at_1": 287,
+        "hit_at_5": 295,
+        "hit_at_10": 300,
+        "mrr_at_10": 0.968
+      },
+      "paraphrase": {
+        "queries": 300,
+        "hit_at_1": 169,
+        "hit_at_5": 220,
+        "hit_at_10": 231,
+        "mrr_at_10": 0.628
+      }
+    },
+    "unredacted": {
+      "keyword": {
+        "queries": 300,
+        "hit_at_1": 287,
+        "hit_at_5": 295,
+        "hit_at_10": 300,
+        "mrr_at_10": 0.971
+      },
+      "paraphrase": {
+        "queries": 300,
+        "hit_at_1": 177,
+        "hit_at_5": 216,
+        "hit_at_10": 240,
+        "mrr_at_10": 0.647
+      }
+    }
+  },
+  "isolation": {
+    "queries": 600,
+    "results_from_another_tenant_with_filter": 0,
+    "queries_exposed_without_filter": 125
+  },
+  "incremental": {
+    "day_one": {
+      "added": 540,
+      "updated": 0,
+      "unchanged": 0,
+      "tombstoned": 0,
+      "chunks_written": 1542,
+      "chunks_removed": 0,
+      "texts_embedded": 1542
+    },
+    "day_two": {
+      "added": 60,
+      "updated": 30,
+      "unchanged": 495,
+      "tombstoned": 15,
+      "chunks_written": 266,
+      "chunks_removed": 0,
+      "texts_embedded": 266
+    },
+    "rerun": {
+      "added": 0,
+      "updated": 0,
+      "unchanged": 585,
+      "tombstoned": 15,
+      "chunks_written": 0,
+      "chunks_removed": 0,
+      "texts_embedded": 0
+    },
+    "full_rebuild_would_embed": 1725,
+    "erased_calls": 15,
+    "chunks_of_erased_calls_remaining": 0,
+    "masked_rows_before_purge": 125,
+    "masked_rows_after_purge": 0,
+    "chunk_table_versions_after_purge": 1,
+    "counts": {
+      "calls": 585,
+      "chunks": 1683,
+      "tombstones": 15
+    }
+  }
+}
